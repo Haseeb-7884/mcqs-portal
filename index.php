@@ -1,5 +1,5 @@
 <?php
-include("includes/connection.php");
+// include("includes/connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +19,8 @@ include("includes/connection.php");
         <div class="container">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-graduation-cap me-2"></i>
-                MCQs Portal..
-            </a>
+                MCQs Portal        
+                </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
