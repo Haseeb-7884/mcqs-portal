@@ -1,0 +1,88 @@
+hey now i am getting confuse for somepoints 
+
+first of all our model is user will come on our website and attempt the quiz
+and when he attempt the quiz after that a reuslt of it genrated
+and he will recevie a certificate if he secure more then 50% in the test 
+and the MCQs must be uploaded by the editor role only means if a user 
+login as a editor must upload his MCQs via after admin approvel 
+
+now first question came in my mind is to make a view mode and a quiz mode 
+in view mode user be able to see the questions and answers and also able to see 
+whom the correct option is but the problem is here the user able to see the
+correct answers of the same MCQs the user will ahve to attempt so here the not
+right choice and admin declined my this suggesion 
+
+next point is i am thinking of the general attempt and the test attempt means 
+like in general attempt the user be able to attempt the MCQs but there is no time limit 
+he have and he able be able to see the correct answer and here in this part also
+have the 2 senarios first is user be able to select only at once for a simgle options 
+means if he select A for any particular MCQs then he not able to change it and as
+he select any optoins on a spot the reuslt occur that its the correct selection or not by\
+highlighting the correct answer and the second senario is user be able to select option multiple
+times means if he select A then he be able to select B or any other C and when he submit it
+he get the result that whom is okay or not and here is the submision compeleted and in that 
+genral submission the user have unlimited time and unlimited submissions means user can submit 
+the same MCQs reuslt mutiple times but he not be able to get certificate in that mode 
+
+and second is the test mode here user only be able to see his result at the end of the test and 
+here the time is also given where the user be able to submit that MCQs reuslt only at once and after that
+attempt the user will not be able to submit multiple attempts
+
+but here in this senrio the point of user will not be able to attempt multiple time with unlimited access like
+unlimited time for the MCQs it will not cost becuase he is accessing the same MCQs without any test and attempt (that can be considered at count)
+and here it will not benefit for the editor to whom is uploading the MCQs 
+
+so here i want to get your suggestion what to do and whom poceudre i should adpot 
+and also i am doing this project as a vibe coder as genrarting the UI scrreens from AI 
+and also some extends of backend where feels more complextions in order to get it 
+compelted on urgent basis 
+
+
+here another clarifcation arose means we have a specifc category and sub category and topic but there should we count the each submission made by the editor 
+as a saperate or just add the all MCQs togather for a specif topic and the category based on what you are answering bcz its need to be clear and here the p[ossiblity 
+that the MCQs can be repetedly inserting we cant filter here and also in the case of saperate submissions 
+so heremany points here to be cleared first then we decide further what we should have to opt 
+
+
+
+okay but here the main point is its hard for the updation of the data means like hard for the editor to update his submission yep i can manage it by stroing the Userid along with the each MCQs 
+and will get the user ID instatnly as the user login via session and also i plan to make the table of it like column contains the primary key and the question and along with teh question 4 column of options 
+and a one column of correct answer and one column of timestamp (storing date and time) along with a column (foreign key)pf user ids get the editor id from the users tables but we get a problem when the data is stroing in it 
+again and again bcz he records get maximize kets see we can get the 1000 MCQs also for a subcategory so we can have multiple subcateogries an admin can make and editor can upload also 
+multiple and its a long running project so we can face 5000 above MCQs that i can imagine but posiibility is posiibility so we have to also watch them bcz the major data can cause slow down 
+and it is not good for the adsense approvel so for that purpose i think we can minimize th enumber of columns like instead of using the 4 columns for 4 oPTIONS i prefer to use the one column like this 
+but can store each in a table so our table of storing data or submission should be like this 
+
+id (primary key)
+question 
+options (multiple options here)
+correct option 
+timestamp
+userID (Foregin key of Id in Users table to fetch editor)
+categoryID (foreign key of id in Categories table to fetch main category)
+SubCatID (FORIEGN Key of id in su_category table to fetch sub category)
+
+but here i notice th eone more thing that is submisison approvel let say a editor make a submission of 10 MCQs okay so it will get save in the database in submissions table but we are on the model that 
+admin will approve it first before it get uploaded on the website so here its difficult to track whom the MCQs editor make at time of submission that need admin approvel means here we cant able 
+to track that sets approvel so for that i decide to make a table like sets table or whatever name it is there the data will be submitted in the form of sets like it contains the following colums
+
+id (primary key)
+question
+options
+System_assinged_id (id that system will assing like SET-0001)
+correct answer 
+userID (Foregin key of Id in Users table to fetch editor)
+categoryID (foreign key of id in Categories table to fetch main category)
+SubCatID (FORIEGN Key of id in su_category table to fetch sub category)
+
+as here this will get submitted we must have each questions saperate but let say a editor upload 10 MCQs at a time then system will asiing it on own id like SET-0001 for the each qustion 
+user upload like if he is uplading 10 MCQs system will assing that 10 MCQs that unique id lets say we have for that SET-0001 and it get submitted as the admin will get this in submissions table 
+on its ends where he can click on the submission and approve it and as he will approve it we can store that same record in the submissions table and hence we can manage the submission as well 
+and also submissions table will get one more column name setID as a foreign key of set table id primary key for fetching the set and the submissions table will get updated in a way like
+
+id (primary key)
+timestamp
+SetID (Foregin key of Id in Set table to indiacate specific set)
+userID (Foregin key of Id in Users table to fetch editor)
+categoryID (foreign key of id in Categories table to fetch main category)
+SubCatID (FORIEGN Key of id in su_category table to fetch sub category)

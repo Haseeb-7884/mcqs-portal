@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 80px 20px;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 60px 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .failure-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fef2f2;
+            border: 3px solid #fecaca;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: #dc2626;
+            font-size: 32px;
+        }
+        
+        .test-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .test-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-item {
+            flex: 1;
+            padding: 20px 16px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 0 2px;
+        }
+        
+        .stat-item.total {
+            background-color: #f9fafb;
+        }
+        
+        .stat-item.correct {
+            background-color: #f0fdf4;
+        }
+        
+        .stat-item.incorrect {
+            background-color: #fef2f2;
+        }
+        
+        .stat-item.score {
+            background-color: #eff6ff;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .stat-item.total .stat-number {
+            color: #374151;
+        }
+        
+        .stat-item.correct .stat-number {
+            color: #16a34a;
+        }
+        
+        .stat-item.incorrect .stat-number {
+            color: #dc2626;
+        }
+        
+        .stat-item.score .stat-number {
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        
+        .failure-message {
+            font-size: 20px;
+            font-weight: 600;
+            color: #dc2626;
+            margin-bottom: 16px;
+            letter-spacing: -0.2px;
+        }
+        
+        .failure-description {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        
+        .final-notice {
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .made-in-bolt {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .bolt-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #1a1a1a;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .test-container {
+                max-width: 90%;
+                padding: 40px 30px;
+            }
+            
+            .stats-row {
+                flex-wrap: wrap;
+                gap: 8px;
+                max-width: 400px;
+            }
+            
+            .stat-item {
+                flex: 1 1 calc(50% - 4px);
+                min-width: 120px;
+            }
+            
+            .test-title {
+                font-size: 28px;
+            }
+            
+            .failure-message {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding: 40px 15px;
+            }
+            
+            .test-container {
+                padding: 32px 24px;
+            }
+            
+            .failure-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+            }
+            
+            .test-title {
+                font-size: 26px;
+            }
+            
+            .stats-row {
+                max-width: 100%;
+            }
+            
+            .stat-item {
+                padding: 16px 12px;
+            }
+            
+            .stat-number {
+                font-size: 24px;
+            }
+            
+            .stat-label {
+                font-size: 13px;
+            }
+            
+            .made-in-bolt {
+                position: static;
+                justify-content: center;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="failure-icon">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <h1 class="test-title">Test Results</h1>
+        <p class="test-subtitle">General Knowledge – Certification Test</p>
+        
+        <div class="stats-row">
+            <div class="stat-item total">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Total Questions</div>
+            </div>
+            
+            <div class="stat-item correct">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            
+            <div class="stat-item incorrect">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Incorrect</div>
+            </div>
+            
+            <div class="stat-item score">
+                <div class="stat-number">10%</div>
+                <div class="stat-label">Score</div>
+            </div>
+        </div>
+        
+        <div class="failure-message">Unfortunately, you did not pass.</div>
+        <div class="failure-description">You need a minimum score of 50% to pass this certification test. Better luck next time.</div>
+        
+        <div class="final-notice">This test has been completed and cannot be retaken. Results are final.</div>
+        
+        <div class="made-in-bolt">
+            <div class="bolt-icon">B</div>
+            <span>Made in Bolt</span>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
